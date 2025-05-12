@@ -1,0 +1,1076 @@
+{
+	"info": {
+		"_postman_id": "a7e21f40-3f12-4a18-9d7b-bc1f24d9b3e9",
+		"name": "Restoran Yönetim Sistemi API",
+		"description": "Restoran yönetim sistemi API koleksiyonu.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Kullanıcılar",
+			"item": [
+				{
+					"name": "Admin Olarak Kayıt Ol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kullanici_adi\": \"admin\",\n    \"sifre\": \"admin123\",\n    \"ad_soyad\": \"Admin Kullanıcı\",\n    \"email\": \"admin@restoran.com\",\n    \"telefon\": \"05551234567\",\n    \"admin_kod\": \"gizli_admin_kod\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register-admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register-admin"
+							]
+						},
+						"description": "Admin yetkisiyle yeni kullanıcı kaydı (admin_kod gerekir)"
+					},
+					"response": []
+				},
+				{
+					"name": "Kayıt Ol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kullanici_adi\": \"yenikullanici\",\n    \"sifre\": \"sifre123\",\n    \"ad_soyad\": \"Yeni Kullanıcı\",\n    \"email\": \"yeni@restoran.com\",\n    \"telefon\": \"05551234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Yeni kullanıcı kaydı"
+					},
+					"response": []
+				},
+				{
+					"name": "Giriş Yap",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kullanici_adi\": \"admin\",\n    \"sifre\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Kullanıcı girişi"
+					},
+					"response": []
+				},
+				{
+					"name": "Tüm Kullanıcıları Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/kullanicilar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kullanicilar"
+							]
+						},
+						"description": "Tüm kullanıcıları listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Kullanıcı Ekle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"kullanici_adi\": \"yenikullanici\",\n    \"sifre\": \"sifre123\",\n    \"ad_soyad\": \"Yeni Kullanıcı\",\n    \"yetki\": \"garson\",\n    \"email\": \"yeni@restoran.com\",\n    \"telefon\": \"05551234567\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/kullanicilar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kullanicilar"
+							]
+						},
+						"description": "Yeni kullanıcı ekler"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Masalar",
+			"item": [
+				{
+					"name": "Tüm Masaları Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/masalar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar"
+							]
+						},
+						"description": "Tüm masaları listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Ekle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"masa_no\": \"M01\",\n    \"kapasite\": 4,\n    \"konum\": \"salon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/masalar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar"
+							]
+						},
+						"description": "Yeni masa ekler (admin yetkisi gerekir)"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Durumu Güncelle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"durum\": \"dolu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/masalar/1/durum",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar",
+								"1",
+								"durum"
+							]
+						},
+						"description": "Masa durumunu günceller (garson yetkisi gerekir)"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Detayı Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/masalar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar",
+								"1"
+							]
+						},
+						"description": "Masa detayını getirir"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Siparişleri Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/masalar/1/siparisler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar",
+								"1",
+								"siparisler"
+							]
+						},
+						"description": "Masanın aktif siparişlerini getirir"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Güncelle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"masa_no\": \"M02\",\n    \"kapasite\": 6,\n    \"konum\": \"teras\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/masalar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar",
+								"1"
+							]
+						},
+						"description": "Masa bilgilerini günceller (admin yetkisi gerekir)"
+					},
+					"response": []
+				},
+				{
+					"name": "Masa Sil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/masalar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"masalar",
+								"1"
+							]
+						},
+						"description": "Masa siler (admin yetkisi gerekir, masada aktif sipariş varsa silinemez)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Kategoriler",
+			"item": [
+				{
+					"name": "Tüm Kategorileri Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/kategoriler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kategoriler"
+							]
+						},
+						"description": "Tüm kategorileri listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Kategori Ekle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ad\": \"Ana Yemekler\",\n    \"aciklama\": \"Ana yemek kategorisi\",\n    \"sira_no\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/kategoriler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"kategoriler"
+							]
+						},
+						"description": "Yeni kategori ekler"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ürünler",
+			"item": [
+				{
+					"name": "Tüm Ürünleri Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/urunler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"urunler"
+							]
+						},
+						"description": "Tüm ürünleri listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Ürün Ekle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "kategori_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "ad",
+									"value": "Köfte",
+									"type": "text"
+								},
+								{
+									"key": "aciklama",
+									"value": "İzgara köfte",
+									"type": "text"
+								},
+								{
+									"key": "fiyat",
+									"value": "75.99",
+									"type": "text"
+								},
+								{
+									"key": "stok_durumu",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "resim",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/urunler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"urunler"
+							]
+						},
+						"description": "Yeni ürün ekler"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Müşteriler",
+			"item": [
+				{
+					"name": "Tüm Müşterileri Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/musteriler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"musteriler"
+							]
+						},
+						"description": "Tüm müşterileri listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Müşteri Ekle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ad\": \"Ahmet\",\n    \"soyad\": \"Yılmaz\",\n    \"telefon\": \"05551234567\",\n    \"email\": \"ahmet@example.com\",\n    \"adres\": \"Örnek Mah. Örnek Sk. No:1\",\n    \"notlar\": \"VIP müşteri\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/musteriler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"musteriler"
+							]
+						},
+						"description": "Yeni müşteri ekler"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Siparişler",
+			"item": [
+				{
+					"name": "Tüm Siparişleri Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/siparisler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"siparisler"
+							]
+						},
+						"description": "Tüm siparişleri listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Sipariş Oluştur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"masa_id\": 1,\n    \"musteri_id\": 1,\n    \"urunler\": [\n        {\n            \"urun_id\": 1,\n            \"miktar\": 2,\n            \"notlar\": \"Az baharatlı\"\n        },\n        {\n            \"urun_id\": 2,\n            \"miktar\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/siparisler",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"siparisler"
+							]
+						},
+						"description": "Yeni sipariş oluşturur"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rezervasyonlar",
+			"item": [
+				{
+					"name": "Tüm Rezervasyonları Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/rezervasyonlar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"rezervasyonlar"
+							]
+						},
+						"description": "Tüm rezervasyonları listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Rezervasyon Oluştur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"masaId\": 1,\n    \"musteriId\": 1,\n    \"tarih\": \"2023-05-15\",\n    \"saat\": \"19:00\",\n    \"kisiSayisi\": 4,\n    \"notlar\": \"Pencere kenarı tercih edilir\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/rezervasyonlar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"rezervasyonlar"
+							]
+						},
+						"description": "Yeni rezervasyon oluşturur"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Faturalar",
+			"item": [
+				{
+					"name": "Tüm Faturaları Getir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/faturalar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"faturalar"
+							]
+						},
+						"description": "Tüm faturaları listeler"
+					},
+					"response": []
+				},
+				{
+					"name": "Fatura Oluştur",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"siparisId\": 1,\n    \"odemeTuru\": \"nakit\",\n    \"faturaDurumu\": \"odendi\",\n    \"aciklama\": \"Nakit ödeme alındı\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/faturalar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"faturalar"
+							]
+						},
+						"description": "Yeni fatura oluşturur"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raporlar",
+			"item": [
+				{
+					"name": "Satış Raporu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/raporlar/satis?baslangicTarihi=2023-01-01&bitisTarihi=2023-12-31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"raporlar",
+								"satis"
+							],
+							"query": [
+								{
+									"key": "baslangicTarihi",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "bitisTarihi",
+									"value": "2023-12-31"
+								}
+							]
+						},
+						"description": "Belirli tarih aralığındaki satış raporunu getirir"
+					},
+					"response": []
+				},
+				{
+					"name": "Ürün Raporu",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/raporlar/urunler?baslangicTarihi=2023-01-01&bitisTarihi=2023-12-31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"raporlar",
+								"urunler"
+							],
+							"query": [
+								{
+									"key": "baslangicTarihi",
+									"value": "2023-01-01"
+								},
+								{
+									"key": "bitisTarihi",
+									"value": "2023-12-31"
+								}
+							]
+						},
+						"description": "Belirli tarih aralığındaki ürün bazlı satış raporunu getirir"
+					},
+					"response": []
+				},
+				{
+					"name": "Günlük Rapor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/raporlar/gunluk?tarih=2023-05-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"raporlar",
+								"gunluk"
+							],
+							"query": [
+								{
+									"key": "tarih",
+									"value": "2023-05-15"
+								}
+							]
+						},
+						"description": "Belirli bir günün satış raporunu getirir"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"if (pm.response.code === 200 || pm.response.code === 201) {",
+					"    const jsonData = pm.response.json();",
+					"    if (jsonData.token) {",
+					"        pm.environment.set(\"token\", jsonData.token);",
+					"        console.log(\"Token saved to environment\");",
+					"    }",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+} 

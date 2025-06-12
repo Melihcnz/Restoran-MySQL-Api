@@ -4,11 +4,11 @@ FROM node:18-alpine
 # Çalışma dizinini ayarla
 WORKDIR /app
 
-# package.json ve package-lock.json dosyalarını kopyala
+# package.json dosyasını kopyala
 COPY package*.json ./
 
 # Bağımlılıkları yükle
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Uygulama dosyalarını kopyala
 COPY . .

@@ -57,6 +57,7 @@ services:
       DB_USER: ${DB_USER:-restoran_user}
       DB_PASSWORD: ${DB_PASSWORD:-restoran123}
       JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_change_in_production}
+      ADMIN_SECRET_CODE: ${ADMIN_SECRET_CODE:-admin2024_secret}
       FILE_UPLOAD_LIMIT: 10mb
     ports:
       - "3001:3001"

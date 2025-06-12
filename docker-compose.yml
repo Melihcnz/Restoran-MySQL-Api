@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # MySQL Veritabanı
+  mysql:
+    image: mysql:8.0
+    container_name: restoran_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-admin123}
+      MYSQL_DATABASE: ${DB_NAME:-restoran_db}
+      MYSQL_USER: ${DB_USER:-restoran_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-restoran123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - restoran_network
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: restoran_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: ${DB_USER:-restoran_user}
+      PMA_PASSWORD: ${DB_PASSWORD:-restoran123}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-admin123}
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - restoran_network
+
+  # Node.js API Uygulaması
+  api:
+    build: .
+    container_name: restoran_api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-restoran_db}
+      DB_USER: ${DB_USER:-restoran_user}
+      DB_PASSWORD: ${DB_PASSWORD:-restoran123}
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_change_in_production}
+      FILE_UPLOAD_LIMIT: 10mb
+    ports:
+      - "3001:3001"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - restoran_network
+    volumes:
+      - ./uploads:/app/uploads
+
+volumes:
+  mysql_data:
+
+networks:
+  restoran_network:
+    driver: bridge 

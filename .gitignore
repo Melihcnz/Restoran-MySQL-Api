@@ -21,3 +21,8 @@ pnpm-lock.yaml
 # sistem dosyaları
 .DS_Store
 Thumbs.db
+
+# Docker ve Log dosyaları
+logs/
+*.log
+uploads/

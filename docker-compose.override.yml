@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=mysql"
+    volumes:
+      - ./logs/mysql:/var/log/mysql
+
+  phpmyadmin:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=phpmyadmin"
+
+  api:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "service=api"
+    volumes:
+      - ./logs/api:/app/logs 
